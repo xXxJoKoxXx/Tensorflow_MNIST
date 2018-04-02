@@ -7,13 +7,8 @@ mnist = input_data.read_data_sets("MNIST_data",one_hot = True)
 xs = tf.placeholder(tf.float32,[None,784]) #None为图片索引，784为28*28像素
 ys = tf.placeholder(tf.float32,[None,10]) #10为标签0-9
 
-#构建模型,增加权重值和偏置值
-'''
-Weights = tf.Variable(tf.zeros[784,10])#用784维的图片乘以权重得到10维的向量值
-biases = tf.Variable(tf.zeros[10])
-'''
 #使用cnn
-#权重初始化
+#权值和偏置值初始化
 def weight_variable(shape):
 	initial = tf.truncated_normal(shape,stddev = 0.1)
 	return tf.Variable(initial)
@@ -85,25 +80,3 @@ for i in range(20000):
 	train_step.run(feed_dict={xs: batch[0], ys: batch[1], keep_prob: 0.5})
 	test_accuracy = accuracy.eval(feed_dict={xs: mnist.test.images, ys: mnist.test.labels, keep_prob: 1.0})
 	print ("test accuracy:",test_accuracy)
-
-'''
-#训练模型
-cross_entropy = -tf.reduce_sum(ys*tf.log(y_pred))
-train_step = tf.train.GradientDescentOptimizer(0.03).minimize(cross_entropy)
-
-init = tf.global_variable.initializer()
-sess = tf.InteractiveSession()
-sess.run(init)
-
-for i in range(300):
-	batch_xs,batch_ys = minist.train.next_batch(100)
-	see.run(train_step,feed_dict = {xs:batch_xs,ys:batch_ys})
-	correct_prediction = tf.equal(tf.argmax(y_pred,1),tf.argmax(ys,1))
-	accuracy = tf.reduce_mean(tf.cast(correct_prediction,tf.float32))
-	if i%50 == 0:
-		print(compute_accuracy(mnist.test.images,mnist.test.labels))
-'''
-
-
-
-
