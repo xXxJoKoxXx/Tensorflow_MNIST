@@ -1,2 +1,3 @@
 # Tensorflow_MNIST
 Tensorflow_learining_step1:use MNIST dataset
+使用CNN卷积神经网络进行训练
